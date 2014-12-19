@@ -118,7 +118,13 @@
 
     // test if any columns on this board contain conflicts
     hasAnyColConflicts: function() {
-      return false; // fixme
+      var columns = this.rows().length;
+      for(var i = 0;i<columns;i++){
+        if(this.hasColConflictAt(i)){
+          return true;
+        }
+      }
+    return false;
     },
 
 
