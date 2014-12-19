@@ -194,10 +194,21 @@
       }
       return true;
     },
-    
+
     // test if any minor diagonals on this board contain conflicts
     hasAnyMinorDiagonalConflicts: function() {
-      return false; // fixme
+      var rows = this.rows();
+      for(var i=rows.length-1; i > 0; i--){
+        if(this.hasMinorDiagonalConflictAt(i)){
+          return true;
+        }
+      }
+      for(var j=1; j <rows.length-1; j++){
+        if(this.hasMinorDiagonalConflictAt(rows.length-1, j)){
+          return true;
+        }
+      }
+      return false;
     }
 
     /*--------------------  End of Helper Functions  ---------------------*/
