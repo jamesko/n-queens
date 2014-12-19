@@ -87,7 +87,6 @@ window.findNQueensSolution = function(n) {
   }
   walkArray(0);
   return board.rows();
-
   //console.log('Single solution for ' + n + ' queens:', JSON.stringify(solution));
   //return solution;
 };
@@ -97,6 +96,39 @@ window.findNQueensSolution = function(n) {
 window.countNQueensSolutions = function(n) {
   var solutionCount = undefined; //fixme
 
-  console.log('Number of solutions for ' + n + ' queens:', solutionCount);
-  return solutionCount;
+  var numbOfQueens = n;
+  var board = new Board({n:n});
+  var count = 0;
+  function walkArray (row){
+    var isSolvable = false;
+    for(var i = 0; i < numbOfQueens; i++){
+      board.togglePiece(row, i);
+      if(board.hasAnyQueensConflicts()){
+        if(i === numbOfQueens - 1){
+          board.togglePiece(row, i);
+          isSolvable = false;
+          return isSolvable;
+        }
+        board.togglePiece(row, i);
+        continue;
+      }
+      if(row === n-1){  // this check for the last row
+        count++;
+        isSolvable = false; // coax continuation
+        //return !isSolvable;
+      } else {
+        isSolvable = walkArray(row +1);
+        if(isSolvable){
+          return isSolvable;
+        }
+        board.togglePiece(row, i);
+      }
+    }
+    return isSolvable;
+  }
+
+  walkArray(0);
+  return count;
+  //console.log('Number of solutions for ' + n + ' queens:', solutionCount);
+  //return solutionCount;
 };
