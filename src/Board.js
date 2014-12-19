@@ -79,7 +79,12 @@
     //
     // test if a specific row on this board contains a conflict
     hasRowConflictAt: function(rowIndex) {
-      return false; // fixme
+      var row = this.get(rowIndex);
+      //Are occurances of a queen or rook the same index?
+      if(row.indexOf(1) === row.lastIndexOf(1)){
+        return false;
+      }
+      return true;
     },
 
     // test if any rows on this board contain conflicts
