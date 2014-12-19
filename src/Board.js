@@ -175,10 +175,26 @@
     // --------------------------------------------------------------
     //
     // test if a specific minor diagonal on this board contains a conflict
-    hasMinorDiagonalConflictAt: function(minorDiagonalColumnIndexAtFirstRow) {
-      return false; // fixme
+    hasMinorDiagonalConflictAt: function(minorDiagonalColumnIndexAtFirstRow, altStartRow) {
+      var idx =minorDiagonalColumnIndexAtFirstRow;
+      var rows = this.rows();
+      var indexValues = [];
+      var shiftRow = altStartRow || 0;
+      var positiveIndexOffset = 0;
+      if(idx>=rows.length){
+        positiveIndexOffset = idx-(rows.length-1)
+      };
+      var colStop = shiftRow + positiveIndexOffset;
+      for(var i=idx; i>=colStop; i--){
+        indexValues.push(rows[shiftRow][i]);
+        shiftRow++;
+      }
+      if(indexValues.indexOf(1) === indexValues.lastIndexOf(1)){
+        return false;
+      }
+      return true;
     },
-
+    
     // test if any minor diagonals on this board contain conflicts
     hasAnyMinorDiagonalConflicts: function() {
       return false; // fixme
