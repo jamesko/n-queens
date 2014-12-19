@@ -105,7 +105,15 @@
     //
     // test if a specific column on this board contains a conflict
     hasColConflictAt: function(colIndex) {
-      return false; // fixme
+      var rows = this.rows();
+      var indexValues = [];
+      for(var i=0;i<rows.length;i++){
+        indexValues.push(rows[i][colIndex]);
+      }
+      if(indexValues.indexOf(1) === indexValues.lastIndexOf(1)){
+        return false;
+      }
+      return true;
     },
 
     // test if any columns on this board contain conflicts
